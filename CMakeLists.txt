@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(strings_h)
+project(strings_h LANGUAGES C)
 
 file(GLOB HEADERS *.h)
 file(GLOB SOURCES *.c)
