@@ -35,20 +35,6 @@ extern "C" {
 #include <string.h>
 #include <ctype.h>
 
-#ifndef _INC_WINDOWS
-
-typedef void * PVOID;
-
-typedef size_t SIZE_T;
-
-#ifndef WINAPI
-#define WINAPI __stdcall
-#endif /* WINAPI */
-
-PVOID WINAPI RtlSecureZeroMemory(PVOID ptr, SIZE_T cnt);
-
-#endif /* _INC_WINDOWS */
-
     static int bcmp(const void * s1, const void * s2, size_t n)
     {
         return memcmp(s1, s2, n);
@@ -66,7 +52,12 @@ PVOID WINAPI RtlSecureZeroMemory(PVOID ptr, SIZE_T cnt);
 
     static void explicit_bzero(void * s, size_t n)
     {
-        RtlSecureZeroMemory(s, n);
+        volatile char * vs = (volatile char *) s;
+        while (n)
+        {
+            *vs++ = 0;
+            n--;
+        }
     }
 
     static char * index(const char * s, int c)
