@@ -116,8 +116,8 @@ extern "C" {
 
         while ((result = tolower(*u1) - tolower(*u2)) == 0 && *u1 != 0)
         {
-            *u1++;
-            *u2++;
+            u1++;
+            u2++;
         }
 
         return result;
@@ -148,8 +148,8 @@ extern "C" {
 
         while ((result = _tolower_l(*u1, loc) - _tolower_l(*u2, loc)) == 0 && *u1 != 0)
         {
-            *u1++;
-            *u2++;
+            u1++;
+            u2++;
         }
 
         return result;
